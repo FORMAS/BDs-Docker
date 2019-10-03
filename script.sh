@@ -37,7 +37,7 @@ sudo docker start/stop NOME
 
 # instala mysql
 sudo docker run --name NOME -e MYSQL_ROOT_PASSWORD=SENHA -d mysql/mysql-server:latest
-# NOME = bd-mysql
+# NOME = bdmysql
 # SENHA = senha
 
 # executa mysql
@@ -50,7 +50,7 @@ mysql -uroot -p
 
 # instala postgres
 sudo docker run --name NOME -e POSTGRES_PASSWORD=SENHA -d postgres
-# NOME = bd-postgres
+# NOME = bdpostgres
 # SENHA = senha
 
 # executa postgres
@@ -63,7 +63,7 @@ psql -h localhost -U postgres -d postgres
 
 # instala mongo (sem senha)
 sudo docker run --name NOME -d mongo:latest
-# NOME = bd-mongo
+# NOME = bdmongo
 
 # executa mongo
 sudo docker exec -it NOME bash
