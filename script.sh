@@ -42,7 +42,7 @@ sudo docker run --name NOME -e MYSQL_ROOT_PASSWORD=SENHA -d mysql/mysql-server:l
 
 # executa mysql
 sudo docker exec -it NOME bash
-mysql -uroot -p
+mysql -u root -p
 
 ################
 ## POSTGRESQL ##
