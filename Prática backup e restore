@@ -1,0 +1,53 @@
+#PRÁTICA BACKUP E RECOVERY MYSQL
+# Baixando estrutura e dados do banco
+	# DDL
+	wget https://raw.githubusercontent.com/datacharmer/test_db/master/sakila/sakila-mv-schema.sql
+	# DML
+	wget https://raw.githubusercontent.com/datacharmer/test_db/master/sakila/sakila-mv-data.sql
+
+# Realizando o Restore ou criando a estrutura do banco a partir do mysqldump
+	# Inicializando o container
+	sudo docker start bdmysql
+
+	# Criando banco
+	cat backup.sql | docker exec -i CONTAINER /usr/bin/mysql -u root --password=root 
+
+	# Verificar criação do banco
+	sudo docker exec -it bdmysql bash
+	mysql -u root -p
+
+# Realizando backup
+	docker exec bdmysql /usr/bin/mysqldump -u root --password=root DATABASE > backup.sql
+	
+
+
+#PRÁTICA BACKUP E RECOVERY POSTGRESQL
+# Baixando estrutura e dados do banco
+	# DDL
+	wget https://raw.githubusercontent.com/devrimgunduz/pagila/master/pagila-schema.sql
+	# DML
+	wget https://raw.githubusercontent.com/devrimgunduz/pagila/master/pagila-insert-data.sql
+
+# Realizando o Restore ou criando a estrutura do banco a partir do pg_dump
+	# Inicializando o container
+	sudo docker start bdmysql
+
+	# Criando banco
+	 cat pagila-schema.sql | sudo docker exec -i bdpostgres psql -h localhost -U postgres -d postgres
+
+	# Conecta ao banco para verificar alterações
+	docker exec -it bdpostgres bash
+	psql -h localhost -U postgres -d postgres
+	\dt # Lista tabelas
+	
+	# Carregando dados
+	cat pagila-insert-data.sql | sudo docker exec -i bdpostgres psql -h localhost -U postgres -d postgres
+
+	# Realizando backup com pg_dump
+	sudo docker exec bdpostgres pg_dump -U postgres -d postgres > backup_postgres.sql
+
+# OBS
+	#Copiando arquivo para o docker
+	docker cp file.sql [cotaier-id]:/file.sql
+
+		
